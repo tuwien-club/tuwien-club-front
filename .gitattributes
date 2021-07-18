@@ -1,0 +1,2 @@
+build/** -diff linguist-generated=true
+dist/** -diff linguist-generated=true 

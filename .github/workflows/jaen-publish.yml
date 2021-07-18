@@ -1,0 +1,91 @@
+# SPDX-FileCopyrightText: Copyright © 2021 snek.at
+# SPDX-License-Identifier: EUPL-1.2
+#
+# Use of this source code is governed by an EUPL-1.2 license that can be found
+# in the LICENSE file at https://snek.at/license
+
+# https://help.github.com/en/articles/workflow-syntax-for-github-actions#name
+name: Jaen Publish
+
+# https://help.github.com/en/articles/workflow-syntax-for-github-actions#on
+on:
+  repository_dispatch:
+    types: [update-jaen-data]
+
+# https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobs
+jobs:
+  # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_id
+  jaen-publish:
+    # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-latest
+
+    env:
+      JAEN_PAYLOAD: ${{ toJson(github.event.client_payload) }}
+  
+    # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idsteps
+    steps:
+      # https://help.github.com/en/articles/virtual-environments-for-github-actions#default-environment-variables
+      # https://github.com/actions/checkout
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+        with:
+          path: '.'
+
+      # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsid
+      - name: Configure GitHub authentication 🔧
+
+        # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+        run: |
+          # Git: set identity
+          git config --global user.name "snekmin"
+          git config --global user.email "noreply.snek.at@gmail.com"
+
+          # Git: set remote  
+          # https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#http-based-git-access-by-an-installation
+          git remote set-url origin "https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/${GITHUB_REPOSITORY}.git"
+
+      # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsid
+      - name: Update jaen-data.json
+
+        # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+        run: |
+          # Create jean-storage branch without history
+          git checkout --orphan jaen-storage
+
+          # Remove unnecessary files
+          git rm -rf .
+
+          # Create `jaen-data.json`
+          curl -L ${{github.event.client_payload.jaendata_url}} | gunzip - | openssl enc -d -base64 -A -aes-256-cbc -md md5 -pass pass:"${{github.event.client_payload.encryption_token}}" -out jaen-data.json
+
+          # reveal what `jaen-data.json` looks like in the logs
+          cat jaen-data.json
+
+          # Git: add, commit, and push changes
+          git add jaen-data.json
+          git commit -m "jaen-publish(jaen-data.json): update jaen-data" || echo "Nothing to commit, working tree clean."
+          GIT_TRACE=1 git push -f --verbose origin jaen-storage
+
+      # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsid
+      - name:
+          Deploy jean-data to Github Pages 🚀
+          # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+        run: |
+          # Create gh-pages branch without history
+          git checkout --orphan gh-pages
+
+          if [[ -z $(git ls-remote --heads origin gh-pages) ]]; then
+            echo "There is no GitHub page deployed"
+          else
+            # Download remote gh-pages without history
+            curl -L https://github.com/${GITHUB_REPOSITORY}/archive/gh-pages.tar.gz | tar -xz --strip-components=1
+          fi
+
+          # Create `jaen-data.json`
+
+          curl -L ${{github.event.client_payload.jaendata_url}} | gunzip - | openssl enc -d -base64 -A -aes-256-cbc -md md5 -pass pass:"${{github.event.client_payload.encryption_token}}" -out jaen-data.json
+          
+          # Git: add, commit, and push changes
+          git add .
+          git commit -m "jaen-publish(jaen-data.json): update jaen-data" || echo "Nothing to commit, working tree clean."
+          GIT_TRACE=1 git push -f --verbose origin gh-pages
