@@ -1,7 +1,7 @@
 {
   "name": "@snek-at/jaen-template",
   "version": "1.2.0",
-  "homepage": "https://template.snek.at/",
+  "homepage": "https://tuwien-club-front.tuwien-club.snek.at/",
   "description": "A template repository for Jaen",
   "scripts": {
     "start": "craco start",
@@ -22,12 +22,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/snek-at/jaen-template.git"
+    "url": "git+https://github.com/tuwien-club/tuwien-club-front.git"
   },
   "author": "Nico Schett",
   "license": "EUPL-1.2",
   "bugs": {
-    "url": "https://github.com/snek-at/jaen-template/issues"
+    "url": "https://github.com/tuwien-club/tuwien-club-front/issues"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",
