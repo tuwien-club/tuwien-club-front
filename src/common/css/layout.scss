@@ -8,8 +8,34 @@
  * in the LICENSE file at https://snek.at/license
  */
 
-body {
-  * {
-    box-sizing: border-box;
+ body {
+  background-color: #fff;
+  overflow-y: scroll;
+  min-height: 100vh;
+  background-position: bottom;
+  background-position-x: center;
+  background-repeat: repeat-x;
+  background-size: 60vh;
+  background-image: url('../circuit_dots.svg');
+  padding-bottom: 30vh;
+  position: relative;
+}
+
+.cms-center{
+  .public-DraftStyleDefault-ltr {
+      text-align: center !important;
   }
+}
+
+h1{
+  font-weight: 400 !important;
+}
+
+h2{
+  font-weight: 400 !important;
+}
+
+h5{
+  padding-top: 2rem;
+  font-weight: 400 !important;
 }

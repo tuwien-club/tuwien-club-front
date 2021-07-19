@@ -2,3 +2,4 @@ build/
 dist/
 node_modules/
 jest.config.js
+src/components/legacy

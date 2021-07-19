@@ -1,6 +1,7 @@
 {
     "dataLayer": {
         "working": {
+            "crypt": {},
             "pages": {
                 "home": {
                     "details": {
