@@ -10,10 +10,10 @@ interface Props {
 
 const Footer = ({copyrightText, copyrightUrl}: Props): JSX.Element => {
   return (
-    <MDBFooter className="page-footer font-small">
-      <div className="footer-copyright text-center py-2 text-light">
+    <MDBFooter className="page-footer">
+      <div className="footer-copyright text-center py-2">
         &copy; {new Date().getFullYear()} Copyright:{' '}
-        <a className="text-light" href={copyrightUrl}>
+        <a className="text-white" href={copyrightUrl}>
           {copyrightText}
         </a>
       </div>

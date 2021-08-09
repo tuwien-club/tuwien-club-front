@@ -1,0 +1,20 @@
+{
+    "dataLayer": {
+        "working": {
+            "crypt": {},
+            "pages": {
+                "home": {
+                    "details": {
+                        "childSlugs": [],
+                        "hiddenChildSlugs": [],
+                        "slug": "home",
+                        "title": "Default HomePage",
+                        "typeName": "HomePage"
+                    },
+                    "fields": {}
+                }
+            },
+            "rootPageSlug": "home"
+        }
+    }
+}

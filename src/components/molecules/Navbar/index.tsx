@@ -51,7 +51,9 @@ const Navbar = ({
     <>
       <MDBNavbar className="navbar-main" expand="lg" dark>
         <MDBContainer>
-          <MDBNavbarBrand href="/">
+          <MDBNavbarBrand
+            aria-current="page"
+            onClick={() => navHandler('/' /*"about", 300*/)}>
             <img
               className="nav-logo"
               src={logoUrl}
@@ -65,12 +67,12 @@ const Navbar = ({
             aria-expanded="false"
             aria-label="Toggle navigation"
             onClick={() => setShowNavbar(!showNavbar)}>
-            <MDBIcon icon="bars" fas />
+            <MDBIcon icon="bars" size="lg" />
           </MDBNavbarToggler>
 
-          <MDBCollapse navbar show={showNavbar}>
-            <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
-              <MDBNavbarItem className="ms-2 font-weight-bold text-uppercase">
+          <MDBCollapse isOpen={showNavbar} navbar>
+            <MDBNavbarNav className="me-auto mb-2 mb-lg-0">
+              <MDBNavbarItem className="ms-3 font-weight-bold text-uppercase">
                 <MDBNavbarLink
                   aria-current="page"
                   active={activePath === '/'}
@@ -79,7 +81,7 @@ const Navbar = ({
                 </MDBNavbarLink>
               </MDBNavbarItem>
 
-              <MDBNavbarItem className="ms-2 font-weight-bold text-uppercase">
+              <MDBNavbarItem className="ms-3 font-weight-bold text-uppercase">
                 <MDBNavbarLink
                   active={activePath === '/groups'}
                   onClick={() => navHandler('/groups' /*"about", 300*/)}>
@@ -87,7 +89,7 @@ const Navbar = ({
                 </MDBNavbarLink>
               </MDBNavbarItem>
 
-              <MDBNavbarItem className="ms-2 font-weight-bold text-uppercase">
+              <MDBNavbarItem className="ms-3 font-weight-bold text-uppercase">
                 <MDBNavbarLink
                   active={activePath === '/faq'}
                   onClick={() => navHandler('/faq' /*"about", 300*/)}>
@@ -95,7 +97,7 @@ const Navbar = ({
                 </MDBNavbarLink>
               </MDBNavbarItem>
 
-              <MDBNavbarItem className="ms-2 font-weight-bold text-uppercase">
+              <MDBNavbarItem className="ms-3 font-weight-bold text-uppercase">
                 <MDBNavbarLink
                   active={activePath === '/rules'}
                   onClick={() => navHandler('/rules' /*"about", 300*/)}>
@@ -103,7 +105,7 @@ const Navbar = ({
                 </MDBNavbarLink>
               </MDBNavbarItem>
 
-              <MDBNavbarItem className="ms-2 font-weight-bold text-uppercase">
+              <MDBNavbarItem className="ms-3 font-weight-bold text-uppercase">
                 <MDBNavbarLink
                   active={activePath === '/contact'}
                   onClick={() => navHandler('/contact' /*"about", 300*/)}>
@@ -111,8 +113,10 @@ const Navbar = ({
                 </MDBNavbarLink>
               </MDBNavbarItem>
 
-              <MDBNavbarItem className="ms-2 font-weight-bold text-uppercase">
-                <MDBNavbarLink active={activePath === '/howto'} href="howto">
+              <MDBNavbarItem className="ms-3 font-weight-bold text-uppercase">
+                <MDBNavbarLink
+                  active={activePath === '/howto'}
+                  onClick={() => navHandler('/howto' /*"about", 300*/)}>
                   How-To
                 </MDBNavbarLink>
               </MDBNavbarItem>

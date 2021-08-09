@@ -2,6 +2,7 @@ import {
   ConnectedPageType,
   SimpleRichTextField as RichTextField
 } from '@snek-at/jaen'
+import {MDBContainer} from 'mdb-react-ui-kit'
 
 import {NavbarHeader, Footer} from '~/components/organisms'
 
@@ -11,17 +12,12 @@ const ContactPage: ConnectedPageType = () => {
   return (
     <>
       <NavbarHeader />
-
-      <div className="container pt-5">
-        <div className="container">
+      <MDBContainer className="pt-5">
+        <div>
           <RichTextField name={'contactsubheading'} />
         </div>
-      </div>
-
-      <Footer
-        copyrightText={'CC <3 snek'}
-        copyrightUrl={'mailto:admin@tuwien.club'}
-      />
+      </MDBContainer>
+      <Footer copyrightText={'CC'} copyrightUrl={'mailto:admin@tuwien.club'} />
     </>
   )
 }

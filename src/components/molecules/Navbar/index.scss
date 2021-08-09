@@ -4,6 +4,9 @@
 
 .navbar-main {
   background: #006699;
+  * {
+    user-select: none;
+  }
 }
 
 .nav-item {

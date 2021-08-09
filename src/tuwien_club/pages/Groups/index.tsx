@@ -1,5 +1,6 @@
 import {
-  ConnectedPageType, //SimpleTextField as TextField,
+  ConnectedPageType,
+  StreamField, //SimpleTextField as TextField,
   SimpleRichTextField as RichTextField
 } from '@snek-at/jaen'
 import {
@@ -8,13 +9,17 @@ import {
   // MDBCard,
   // MDBCardBody,
   // MDBCardHeader,
+  MDBNavbarLink,
   MDBBreadcrumb,
   MDBBreadcrumbItem
 } from 'mdb-react-ui-kit'
+import {useHistory} from 'react-router'
 
+import {GroupsCardBlock} from '~/components/blocks'
 //import {useState} from 'react'
 import {NavbarHeader, Footer} from '~/components/organisms'
 
+import StudyPage from '../Study'
 import './index.scss'
 
 const GroupsPage: ConnectedPageType = () => {
@@ -23,6 +28,12 @@ const GroupsPage: ConnectedPageType = () => {
   //   s[t.study.studyType] = [...(s[t.study.studyType] || []), t]
   //   return s
   // }, {})
+  const history = useHistory()
+  const linkHandler = (
+    path: string /*position: string, offset: number*/
+  ): void => {
+    history.push(path)
+  }
 
   return (
     <>
@@ -31,18 +42,25 @@ const GroupsPage: ConnectedPageType = () => {
         <MDBContainer fluid>
           <MDBBreadcrumb>
             <MDBBreadcrumbItem active>
-              <a href="#">Gruppen</a>
+              <MDBNavbarLink
+                aria-current="page"
+                onClick={() => linkHandler('/groups')}>
+                groups
+              </MDBNavbarLink>
             </MDBBreadcrumbItem>
           </MDBBreadcrumb>
         </MDBContainer>
       </nav>
       <MDBContainer className="pt-5">
-        <MDBContainer>
-          <RichTextField name={'groupsosubheading'} />
-        </MDBContainer>
+        <RichTextField name={'groupsosubheading'} />
       </MDBContainer>
       <MDBContainer>
-        <MDBContainer className="accordion mt-5">
+        <div className="accordion">
+          <StreamField
+            reverseOrder={false}
+            name={'groupscards1'}
+            blocks={[GroupsCardBlock]}
+          />
           {/* {Object.keys(studies).map((studytype: any, index: number) => (
             <>
               <MDBCard className="accordion-item mt-3">
@@ -76,7 +94,7 @@ const GroupsPage: ConnectedPageType = () => {
               </MDBCard>
             </>
           ))} */}
-        </MDBContainer>
+        </div>
       </MDBContainer>
       <Footer copyrightText={'CC'} copyrightUrl={'mailto:admin@tuwien.club'} />
     </>
@@ -84,6 +102,6 @@ const GroupsPage: ConnectedPageType = () => {
 }
 
 GroupsPage.PageType = 'GroupsPage'
-GroupsPage.ChildPages = []
+GroupsPage.ChildPages = [StudyPage]
 
 export default GroupsPage

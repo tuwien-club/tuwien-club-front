@@ -17,7 +17,8 @@ import {
   GroupsPage,
   HomePage,
   HowtoPage,
-  RulesPage
+  RulesPage,
+  StudyPage
 } from './tuwien_club/pages'
 
 const App: React.FC = () => {
@@ -31,7 +32,8 @@ const App: React.FC = () => {
           GroupsPage,
           HomePage,
           HowtoPage,
-          RulesPage
+          RulesPage,
+          StudyPage
         ]}></CMSProvider>
     </div>
   )
