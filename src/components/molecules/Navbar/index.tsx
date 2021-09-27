@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   MDBContainer,
   MDBNavbarBrand,
@@ -8,11 +9,12 @@ import {
   MDBNavbarLink
 } from 'mdb-react-ui-kit'
 import {useState} from 'react'
-import {useHistory} from 'react-router'
 
-import Logo from '~/common/logo.svg'
+import {navigate} from 'gatsby'
 
-import {MDBNavbar, MDBCollapse} from '~/components/legacy'
+import Logo from '../../../common/logo.svg'
+
+import {MDBNavbar, MDBCollapse} from '../../legacy'
 
 import './index.scss'
 
@@ -26,24 +28,14 @@ const Navbar = ({
   logoUrl = Logo,
   logoAlt = 'tuwien club'
 }: Props): JSX.Element => {
-  const activePath = window.location.pathname
+  const activePath = (typeof window !== 'undefined' && window.location.pathname) || ''
   const [showNavbar, setShowNavbar] = useState(false)
-
-  const history = useHistory()
-  //const cmsContext = useCMSContext()
-  //const pageContext = useCMSPageContext()
-
-  // const getKeyFromSlug = (slug: string) => {
-  //   const refs = cmsContext.keyRefs?.indexKey
-
-  //   return Object.keys(pickBy(refs, page => page.slug === slug))[0] || ''
-  // }
 
   const navHandler = (
     path: string /*position: string, offset: number*/
   ): void => {
-    setShowNavbar(false)
-    history.push(path)
+    // setShowNavbar(false)
+    navigate(path)
     //scroller.scrollTo(position, offset)
   }
 

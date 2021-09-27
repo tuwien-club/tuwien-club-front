@@ -19,14 +19,8 @@
     "baseUrl": ".",
     "outDir": "lib",
     "declaration": true,
-    "typeRoots": [
-      "./node_modules/@types",
-      "./types"
-    ],
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "lib": ["dom", "esnext"],
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -49,6 +43,10 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "src/components/molecules/index.ts",
+    "src/components/pages/ApartmentPage/index.tsx",
+    "src/components/pages/HousePage/index.jsx",
+    "wrap-with-provider.js"
   ]
 }

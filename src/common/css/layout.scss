@@ -8,7 +8,7 @@
  * in the LICENSE file at https://snek.at/license
  */
 
-@media (min-width: 992px){
+ @media (min-width: 992px){
   
   .container{
     padding: 0 100px
@@ -21,19 +21,18 @@
  }
 
  body {
-  background-color: #fff;
   overflow-y: scroll;
-  min-height: 100vh;
-  background-position: center bottom;
-  background-repeat: repeat-x;
-  background-size: 60vh;
-  background-image: url('../circuit_dots.svg');
-  padding-bottom: 30vh;
-  position: relative;
+  min-height: 100vh !important;
+  background-position: center bottom !important;
+  background-repeat: repeat-x !important;
+  background-size: 60vh !important;
+  background-image: url('../common/circuit_dots.svg') !important;
+  padding-bottom: 30vh !important;
+  position: relative !important;
 }
 
 .cms-center{
-  .public-DraftStyleDefault-ltr {
+  * {
       text-align: center !important;
   }
 }
@@ -58,4 +57,21 @@ h5{
     display: inline;
     padding: 0;
   }
+}
+
+::-webkit-scrollbar{
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb{
+  background: #6B6B6B;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover{
+  background: #B3AFB3;
+}
+  ::-webkit-scrollbar-track{
+  background: #FFFFFF;
+  border-radius: 0px;
+  box-shadow: inset 0px 0px 0px 0px #F0F0F0;
 }

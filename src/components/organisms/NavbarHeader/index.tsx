@@ -1,4 +1,4 @@
-import {Navbar} from '~/components/molecules'
+import {Navbar} from '../../molecules'
 
 import './index.scss'
 

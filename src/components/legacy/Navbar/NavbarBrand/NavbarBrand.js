@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { NavLink as Link } from 'react-router-dom';
+import {Link} from 'gatsby'
 
 const NavbarBrand = ({ className, href, ...attributes }) => {
   const classes = classNames('navbar-brand', className);
