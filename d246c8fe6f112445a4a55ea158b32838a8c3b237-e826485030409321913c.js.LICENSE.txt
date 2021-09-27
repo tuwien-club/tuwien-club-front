@@ -1,0 +1,15 @@
+/*!
+ * JavaScript Cookie v2.2.1
+ * https://github.com/js-cookie/js-cookie
+ *
+ * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
+ * Released under the MIT license
+ */
+
+/**
+ * @license
+ * Copyright Nico Schett. All Rights Reserved.
+ *
+ * Use of this source code is governed by an EUPL-1.2 license that can be found
+ * in the LICENSE file at https://snek.at/license
+ */
