@@ -1,0 +1,2 @@
+(self.webpackChunktuwien_club_front=self.webpackChunktuwien_club_front||[]).push([[926],{48926:function(n){function e(n,e,t,o,r,u,i){try{var c=n[u](i),f=c.value}catch(s){return void t(s)}c.done?e(f):Promise.resolve(f).then(o,r)}n.exports=function(n){return function(){var t=this,o=arguments;return new Promise((function(r,u){var i=n.apply(t,o);function c(n){e(i,r,u,c,f,"next",n)}function f(n){e(i,r,u,c,f,"throw",n)}c(void 0)}))}},n.exports.default=n.exports,n.exports.__esModule=!0}}]);
+//# sourceMappingURL=926-7a00da533e692cb60f77.js.map

@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkjaen_panoramaweg_page=self.webpackChunkjaen_panoramaweg_page||[]).push([[883],{48557:function(e,a,n){n.r(a);var t=n(67294),u=n(7611);a.default=function(){return(0,u.jsx)(t.Fragment,null,(0,u.jsx)("h1",null,"404: Not Found"),(0,u.jsx)("p",null,"You just hit a route that doesn't exist... the sadness."))}}}]);
-//# sourceMappingURL=component---src-pages-404-js-76c9d122497544295834.js.map

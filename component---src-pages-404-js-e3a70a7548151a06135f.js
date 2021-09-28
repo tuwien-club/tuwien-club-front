@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunktuwien_club_front=self.webpackChunktuwien_club_front||[]).push([[883],{48557:function(t,u,n){n.r(u);var e=n(67294),s=n(7611);u.default=function(){return(0,s.jsx)(e.Fragment,null,(0,s.jsx)("h1",null,"404: Not Found"),(0,s.jsx)("p",null,"You just hit a route that doesn't exist... the sadness."))}}}]);
+//# sourceMappingURL=component---src-pages-404-js-e3a70a7548151a06135f.js.map

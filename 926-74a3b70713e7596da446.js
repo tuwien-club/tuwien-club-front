@@ -1,2 +1,0 @@
-(self.webpackChunkjaen_panoramaweg_page=self.webpackChunkjaen_panoramaweg_page||[]).push([[926],{48926:function(e){function n(e,n,o,t,r,a,u){try{var p=e[a](u),i=p.value}catch(s){return void o(s)}p.done?n(i):Promise.resolve(i).then(t,r)}e.exports=function(e){return function(){var o=this,t=arguments;return new Promise((function(r,a){var u=e.apply(o,t);function p(e){n(u,r,a,p,i,"next",e)}function i(e){n(u,r,a,p,i,"throw",e)}p(void 0)}))}},e.exports.default=e.exports,e.exports.__esModule=!0}}]);
-//# sourceMappingURL=926-74a3b70713e7596da446.js.map
