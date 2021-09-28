@@ -1,8 +1,8 @@
 {
-  "name": "jaen-panoramaweg-page",
+  "name": "tuwien-club-front",
   "version": "1.2.0",
   "description": "A template repository for Jaen",
-  "homepage": "https://jaen-panoramaweg-page.emailwerk.snek.at/",
+  "homepage": "https://tuwien-club-front.tuwien-club.snek.at/",
   "author": "Florian Kleber",
   "license": "EUPL-1.2",
   "main": "lib/index.js",
@@ -15,10 +15,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/emailwerk/jaen-panoramaweg-page.git"
+    "url": "git+https://github.com/tuwien-club/tuwien-club-front.git"
   },
   "bugs": {
-    "url": "https://github.com/emailwerk/jaen-panoramaweg-page/issues"
+    "url": "https://github.com/tuwien-club/tuwien-club-front/issues"
   },
   "scripts": {
     "build": "gatsby build",

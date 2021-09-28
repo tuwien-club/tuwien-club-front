@@ -1,5 +1,5 @@
 module.exports = {
-  remote: 'emailwerk/jaen-panoramaweg-page',
+  remote: 'tuwien-club/tuwien-club-front',
   plugins: {
     pages: {
       resolve: require('@snek-at/jaen-pages/jaen-register'),
