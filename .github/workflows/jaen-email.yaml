@@ -10,7 +10,7 @@ name: Jaen Email
 # https://help.github.com/en/articles/workflow-syntax-for-github-actions#on
 on:
   repository_dispatch:
-    types: [send_mail]
+    types: ['not_email']
 
 # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobs
 jobs:
@@ -36,9 +36,9 @@ jobs:
           # Required mail subject:
           subject: Github Actions job result
           # Required recipients' addresses:
-          to: kleberbaum@erebos.xyz,admin@ts3.party
+          to: kleberbaum@erebos.xyz, contact@aichner-christian.com
           # Required sender full name (address can be skipped):
-          from: Luke Skywalker # <user@example.com>
+          from: ${{github.event.client_payload.form_first_name}} ${{github.event.client_payload.form_last_name}} <noreply@snek.at> # <user@example.com>
           # Optional whether this connection use TLS (default is true if server_port is 465)
           #secure: true
           # Optional plain body:
@@ -50,7 +50,7 @@ jobs:
           # Optional blind carbon copy recipients:
           #bcc: r2d2@example.com,hansolo@example.com
           # Optional recipient of the email response:
-          reply_to: luke@example.com
+          reply_to: ${{github.event.client_payload.from_email}}
           # Optional unsigned/invalid certificates allowance:
           #ignore_cert: true
           # Optional converting Markdown to HTML (set content_type to text/html too):

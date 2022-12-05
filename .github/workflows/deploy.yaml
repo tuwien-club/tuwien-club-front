@@ -52,8 +52,8 @@ jobs:
             # Adjust CNAME
             domainOld="jaen-template.snek-at.snek.at"
             domain="${GITHUB_REPOSITORY#*/}.${GITHUB_REPOSITORY%/*}.snek.at"
-            sed -i "s|$domainOld|$domain|g" public/CNAME
-            git add public/CNAME
+            sed -i "s|$domainOld|$domain|g" CNAME
+            git add CNAME
             
             # Adjust package.json
             homepageOld="https://template.snek.at/"
@@ -68,7 +68,7 @@ jobs:
             git add package.json
             # Git: commit, and push changes
             git commit -m "deploy(package.json): configure Jaen gitRemote" || echo "Nothing to commit, working tree clean."
-            GIT_TRACE=1 git push -f --verbose origin main
+            # GIT_TRACE=1 git push -f --verbose origin main
 
             echo "Create jaen-storage branch"
             # Create jean-storage branch without history
@@ -82,14 +82,14 @@ jobs:
             # Git: add, commit, and push changes
             git add jaen-data.json
             git commit -m "deploy(jaen-data.json): update jaen-data" || echo "Nothing to commit, working tree clean."
-            GIT_TRACE=1 git push -f --verbose origin jaen-storage
+            # GIT_TRACE=1 git push -f --verbose origin jaen-storage
 
             # Create gh-pages branch without history
             git checkout --orphan gh-pages
             echo '' > jaen-data.json
             git add jaen-data.json
             git commit -m "deploy(jaen-data.json): update jaen-data" || echo "Nothing to commit, working tree clean."
-            GIT_TRACE=1 git push -f --verbose origin gh-pages
+            # GIT_TRACE=1 git push -f --verbose origin gh-pages
           else
             # Jaen is already configured"
             echo "Jaen has already been initialized"
@@ -97,7 +97,9 @@ jobs:
 
       # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsid
       - name: Install and Build 🔧
+        env: # Or as an environment variable
+          GATSBY_GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
         run: |
           git checkout main
-          npm install
-          npm run deploy
+          yarn install
+          yarn deploy

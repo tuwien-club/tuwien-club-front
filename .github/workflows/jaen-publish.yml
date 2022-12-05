@@ -21,7 +21,8 @@ jobs:
 
     env:
       JAEN_PAYLOAD: ${{ toJson(github.event.client_payload) }}
-  
+      JAEN_PAGES_MIGRATION_URL: ${{github.event.client_payload.jaendata_url}}
+
     # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idsteps
     steps:
       # https://help.github.com/en/articles/virtual-environments-for-github-actions#default-environment-variables
@@ -30,6 +31,10 @@ jobs:
         uses: actions/checkout@v2.3.1
         with:
           path: '.'
+        
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '15'
 
       # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsid
       - name: Configure GitHub authentication 🔧
@@ -39,53 +44,24 @@ jobs:
           # Git: set identity
           git config --global user.name "snekmin"
           git config --global user.email "noreply.snek.at@gmail.com"
-
           # Git: set remote  
           # https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#http-based-git-access-by-an-installation
           git remote set-url origin "https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/${GITHUB_REPOSITORY}.git"
-
-      # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsid
-      - name: Update jaen-data.json
-
-        # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsrun
-        run: |
-          # Create jean-storage branch without history
-          git checkout --orphan jaen-storage
-
-          # Remove unnecessary files
-          git rm -rf .
-
-          # Create `jaen-data.json`
-          curl -L ${{github.event.client_payload.jaendata_url}} | gunzip - | openssl enc -d -base64 -A -aes-256-cbc -md md5 -pass pass:"${{github.event.client_payload.encryption_token}}" -out jaen-data.json
-
-          # reveal what `jaen-data.json` looks like in the logs
-          cat jaen-data.json
-
-          # Git: add, commit, and push changes
-          git add jaen-data.json
-          git commit -m "jaen-publish(jaen-data.json): update jaen-data" || echo "Nothing to commit, working tree clean."
-          GIT_TRACE=1 git push -f --verbose origin jaen-storage
-
       # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsid
       - name:
           Deploy jean-data to Github Pages 🚀
           # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+        env: # Or as an environment variable
+          GATSBY_GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
         run: |
           # Create gh-pages branch without history
-          git checkout --orphan gh-pages
+          #git checkout --orphan gh-pages
+          git checkout main
 
-          if [[ -z $(git ls-remote --heads origin gh-pages) ]]; then
-            echo "There is no GitHub page deployed"
-          else
-            # Download remote gh-pages without history
-            curl -L https://github.com/${GITHUB_REPOSITORY}/archive/gh-pages.tar.gz | tar -xz --strip-components=1
-          fi
-
-          # Create `jaen-data.json`
-
-          curl -L ${{github.event.client_payload.jaendata_url}} | gunzip - | openssl enc -d -base64 -A -aes-256-cbc -md md5 -pass pass:"${{github.event.client_payload.encryption_token}}" -out jaen-data.json
-          
+          yarn install
+          npx jaen-pages build
+          yarn deploy
           # Git: add, commit, and push changes
           git add .
           git commit -m "jaen-publish(jaen-data.json): update jaen-data" || echo "Nothing to commit, working tree clean."
-          GIT_TRACE=1 git push -f --verbose origin gh-pages
+          GIT_TRACE=1 git push -f --verbose origin main
